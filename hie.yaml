@@ -1,0 +1,13 @@
+cradle:
+  stack:
+    - path: "././."
+      component: "Fileserver:lib"
+
+    - path: "./app/Main.hs"
+      component: "Fileserver:exe:fileserver"
+
+    - path: "./app/Paths_Fileserver.hs"
+      component: "Fileserver:exe:fileserver"
+
+    - path: "./test"
+      component: "Fileserver:test:fileserver-test"
