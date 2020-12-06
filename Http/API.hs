@@ -6,9 +6,8 @@ import Network.Wai
 import Servant
 
 import Http.Types
-import Files.Types
-
-import Path
+import Control.Monad.IO.Class
+import Persistence.FilesystemState
 
 type API = FileAPI -- :<|> MessagingAPI :<|> UserAPI :<|> TechAPI
 
@@ -21,11 +20,10 @@ type ListFiles =
   "files" :> "list" :> Get '[JSON] RespListFiles
 
 
-app :: Application
-app = serve (Proxy @API) server
+app :: Filesystem -> Application
+app filesystem = serve (Proxy @API) (server filesystem)
 
-server :: Server API
-server = return . RespListFiles . FileTree $ Directory $(mkRelDir "root") Metadata
-  [ File $(mkRelFile "file1") Metadata
-  , File $(mkRelFile "file2") Metadata
-  ]
+server :: Filesystem -> Server API
+server filesystem = do
+  root <- liftIO $ getRoot filesystem
+  return . RespListFiles $ root

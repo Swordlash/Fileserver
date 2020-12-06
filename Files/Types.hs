@@ -27,7 +27,7 @@ data FileTreeNode
   deriving anyclass (ToJSON, FromJSON)
 
 newtype FileTree = FileTree FileTreeNode
-  deriving newtype (Eq, Show, ToJSON, FromJSON)
+  deriving newtype (Eq, Show, ToJSON, FromJSON, Generic)
 
 
 instance (Typeable a, Typeable b) => SafeCopy (Path a b) where
