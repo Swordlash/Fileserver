@@ -4,7 +4,7 @@ import Data.Acid
 import Data.Acid.Advanced
 import Data.Acid.Local
 import Data.SafeCopy
-import Files.Types
+import Files.Types hiding (dirname)
 
 import GHC.Generics
 import Path
@@ -26,15 +26,20 @@ getFilesystemState = ask
 $(deriveSafeCopy 0 'base ''FilesystemState)
 $(makeAcidic ''FilesystemState ['getFilesystemState])
 
-emptyFilesystem :: FilesystemState
-emptyFilesystem = FilesystemState . FileTree $ Directory $(mkRelDir "root") Metadata []
-
+emptyFilesystem :: Path Rel Dir -> FilesystemState
+emptyFilesystem dir = FilesystemState . FileTree $ Directory dir Metadata []
 
 open :: FilePath -> IO Filesystem
 open filePath = do
   canonical <- makeAbsolute filePath
   root <- parseAbsDir canonical
-  state <- openLocalStateFrom canonical emptyFilesystem
+  let appStateDir = root </> $(mkRelDir "app-state")
+      appRootDir  = root </> $(mkRelDir "root")
+
+  createDirectoryIfMissing True (fromAbsDir appStateDir)
+  createDirectoryIfMissing True (fromAbsDir appRootDir)
+
+  state <- openLocalStateFrom (fromAbsDir appStateDir) (emptyFilesystem $ dirname appRootDir)
   return $ Filesystem {state, root}
 
 close :: Filesystem -> IO ()
