@@ -29,7 +29,6 @@ data FileTreeNode
 newtype FileTree = FileTree FileTreeNode
   deriving newtype (Eq, Show, ToJSON, FromJSON, Generic)
 
-
 instance (Typeable a, Typeable b) => SafeCopy (Path a b) where
   putCopy (Path path) = contain $ safePut path
   getCopy = contain $ Path <$> safeGet

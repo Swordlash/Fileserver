@@ -32,8 +32,8 @@ emptyFilesystem = FilesystemState . FileTree $ Directory $(mkRelDir "root") Meta
 
 open :: FilePath -> IO Filesystem
 open filePath = do
-  canonical <- canonicalizePath filePath
-  root <- parseAbsDir filePath
+  canonical <- makeAbsolute filePath
+  root <- parseAbsDir canonical
   state <- openLocalStateFrom canonical emptyFilesystem
   return $ Filesystem {state, root}
 
