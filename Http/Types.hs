@@ -1,7 +1,6 @@
 module Http.Types where
 
-import Data.Aeson
-import GHC.Generics
+import Basis
 
 import Files.Types
 

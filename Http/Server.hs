@@ -1,12 +1,12 @@
 module Http.Server where
 
+import Basis
 import Network.Wai
 import Servant
 
 import Http.API
 import Http.Types
 import Http.Monad
-import Control.Monad.Reader
 import Persistence.FilesystemState
 
 app :: Filesystem -> Application

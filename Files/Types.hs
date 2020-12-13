@@ -1,38 +1,48 @@
-module Files.Types where
+{-# OPTIONS_GHC -F -pgmF=record-dot-preprocessor #-}
+module Files.Types
+  ( Hash(..)
+  , FileMetadata(..)
+  , DirMetadata (..)
+  , File (..)
+  , Directory (..)
+  , FileTree (..)
+  ) where
 
-import Data.Aeson
-import Data.SafeCopy
+import Basis
 
-import GHC.Generics
-import Data.Typeable
+data FileMetadata = FileMetadata
+  { fileHash :: !Hash
+  } deriving stock (Eq, Show, Generic)
+    deriving anyclass (ToJSON, FromJSON)
 
-import Path
-import Path.Internal
+data DirMetadata = DirMetadata
+  { --hash :: !Hash
+  } deriving stock (Eq, Show, Generic)
+    deriving anyclass (ToJSON, FromJSON)
 
-data Metadata = Metadata
-  deriving stock (Eq, Show, Generic)
-  deriving anyclass (ToJSON, FromJSON)
+newtype Hash = Hash { sha256 :: [Char] }
+  deriving newtype (Eq, Show, Ord, ToJSON, FromJSON)
 
-data FileTreeNode
-  = File
-    { filename :: !(Path Rel File)
-    , metadata :: !Metadata
-    }
-  | Directory
-    { dirname :: !(Path Rel Dir)
-    , metadata :: !Metadata
-    , entries  :: ![FileTreeNode]
-    }
-  deriving stock (Eq, Show, Generic)
-  deriving anyclass (ToJSON, FromJSON)
+data File = File
+  { fileName :: !(Path Rel Fil)
+  , metadata :: !FileMetadata
+  } deriving stock (Eq, Show, Generic)
+    deriving anyclass (ToJSON, FromJSON)
 
-newtype FileTree = FileTree FileTreeNode
+data Directory = Directory
+  { dirName   :: !(Path Rel Dir)
+  , subDirs   :: ![Directory]
+  , files     :: ![File]
+  , metadata  :: !DirMetadata
+  } deriving stock (Eq, Show, Generic)
+    deriving anyclass (ToJSON, FromJSON)
+
+newtype FileTree = FileTree Directory
   deriving newtype (Eq, Show, ToJSON, FromJSON, Generic)
 
-instance (Typeable a, Typeable b) => SafeCopy (Path a b) where
-  putCopy (Path path) = contain $ safePut path
-  getCopy = contain $ Path <$> safeGet
-
-$(deriveSafeCopy 0 'base ''Metadata)
-$(deriveSafeCopy 0 'base ''FileTreeNode)
+$(deriveSafeCopy 0 'base ''Hash)
+$(deriveSafeCopy 0 'base ''DirMetadata)
+$(deriveSafeCopy 0 'base ''FileMetadata)
+$(deriveSafeCopy 0 'base ''File)
+$(deriveSafeCopy 0 'base ''Directory)
 $(deriveSafeCopy 0 'base ''FileTree)

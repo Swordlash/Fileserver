@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 2c239d2775599e9ca65bbe77b7de4235e87617b9fe7efb20dbef7b459f878791
+-- hash: 95133faa9003c94b82c533dc96150d259fbd423522aacdd3e90067c530c5ae86
 
 name:           Fileserver
 version:        0.1.0.0
@@ -26,7 +26,9 @@ source-repository head
 
 library
   exposed-modules:
+      Basis
       Files.Types
+      Files.Utils
       Http.API
       Http.Monad
       Http.Server
@@ -36,7 +38,7 @@ library
       Paths_Fileserver
   hs-source-dirs:
       ./.
-  default-extensions: OverloadedStrings OverloadedLists DataKinds PolyKinds MultiParamTypeClasses FunctionalDependencies FlexibleInstances UndecidableInstances LambdaCase NamedFieldPuns RecordWildCards TypeApplications TypeFamilies TypeOperators RankNTypes ScopedTypeVariables TemplateHaskell DeriveGeneric DeriveDataTypeable DeriveAnyClass DerivingStrategies DuplicateRecordFields GeneralizedNewtypeDeriving
+  default-extensions: OverloadedStrings OverloadedLists DataKinds PolyKinds MultiParamTypeClasses FunctionalDependencies FlexibleInstances UndecidableInstances LambdaCase NamedFieldPuns RecordWildCards TypeApplications TypeFamilies TypeOperators RankNTypes ScopedTypeVariables TemplateHaskell DeriveGeneric DeriveDataTypeable DeriveAnyClass DerivingStrategies DuplicateRecordFields GeneralizedNewtypeDeriving QuasiQuotes NoImplicitPrelude TupleSections
   build-depends:
       acid-state
     , aeson
@@ -44,14 +46,20 @@ library
     , conduit
     , cryptonite
     , directory
+    , extra
+    , filepath
+    , interpolatedstring-perl6
     , ixset-typed
     , mtl
     , optparse-applicative
     , path
+    , protolude
+    , record-hasfield
     , safecopy
     , servant-conduit
     , servant-server
     , text
+    , unliftio
     , wai
     , warp
   default-language: Haskell2010
@@ -62,8 +70,8 @@ executable fileserver
       Paths_Fileserver
   hs-source-dirs:
       app
-  default-extensions: OverloadedStrings OverloadedLists DataKinds PolyKinds MultiParamTypeClasses FunctionalDependencies FlexibleInstances UndecidableInstances LambdaCase NamedFieldPuns RecordWildCards TypeApplications TypeFamilies TypeOperators RankNTypes ScopedTypeVariables TemplateHaskell DeriveGeneric DeriveDataTypeable DeriveAnyClass DerivingStrategies DuplicateRecordFields GeneralizedNewtypeDeriving
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  default-extensions: OverloadedStrings OverloadedLists DataKinds PolyKinds MultiParamTypeClasses FunctionalDependencies FlexibleInstances UndecidableInstances LambdaCase NamedFieldPuns RecordWildCards TypeApplications TypeFamilies TypeOperators RankNTypes ScopedTypeVariables TemplateHaskell DeriveGeneric DeriveDataTypeable DeriveAnyClass DerivingStrategies DuplicateRecordFields GeneralizedNewtypeDeriving QuasiQuotes NoImplicitPrelude TupleSections
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall -Wextra -Wincomplete-uni-patterns -Wpartial-fields
   build-depends:
       Fileserver
     , acid-state
@@ -72,14 +80,20 @@ executable fileserver
     , conduit
     , cryptonite
     , directory
+    , extra
+    , filepath
+    , interpolatedstring-perl6
     , ixset-typed
     , mtl
     , optparse-applicative
     , path
+    , protolude
+    , record-hasfield
     , safecopy
     , servant-conduit
     , servant-server
     , text
+    , unliftio
     , wai
     , warp
   default-language: Haskell2010
@@ -91,7 +105,7 @@ test-suite fileserver-test
       Paths_Fileserver
   hs-source-dirs:
       test
-  default-extensions: OverloadedStrings OverloadedLists DataKinds PolyKinds MultiParamTypeClasses FunctionalDependencies FlexibleInstances UndecidableInstances LambdaCase NamedFieldPuns RecordWildCards TypeApplications TypeFamilies TypeOperators RankNTypes ScopedTypeVariables TemplateHaskell DeriveGeneric DeriveDataTypeable DeriveAnyClass DerivingStrategies DuplicateRecordFields GeneralizedNewtypeDeriving
+  default-extensions: OverloadedStrings OverloadedLists DataKinds PolyKinds MultiParamTypeClasses FunctionalDependencies FlexibleInstances UndecidableInstances LambdaCase NamedFieldPuns RecordWildCards TypeApplications TypeFamilies TypeOperators RankNTypes ScopedTypeVariables TemplateHaskell DeriveGeneric DeriveDataTypeable DeriveAnyClass DerivingStrategies DuplicateRecordFields GeneralizedNewtypeDeriving QuasiQuotes NoImplicitPrelude TupleSections
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       Fileserver
@@ -101,17 +115,23 @@ test-suite fileserver-test
     , conduit
     , cryptonite
     , directory
+    , extra
+    , filepath
     , hspec
     , hspec-wai
     , hspec-wai-json
+    , interpolatedstring-perl6
     , ixset-typed
     , mtl
     , optparse-applicative
     , path
+    , protolude
+    , record-hasfield
     , safecopy
     , servant-conduit
     , servant-server
     , text
+    , unliftio
     , wai
     , warp
   default-language: Haskell2010

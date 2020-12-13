@@ -1,18 +1,16 @@
+{-# OPTIONS_GHC -F -pgmF=record-dot-preprocessor #-}
 module Persistence.FilesystemState where
 
+import Basis
 import Data.Acid
 import Data.Acid.Advanced
 import Data.Acid.Local
-import Data.SafeCopy
-import Files.Types hiding (dirname)
+import Files.Types
 
-import GHC.Generics
-import Path
 import System.Directory
-import Control.Monad.Reader
 
 data Filesystem = Filesystem
-  { state :: !(AcidState FilesystemState)
+  { fsState :: !(AcidState FilesystemState)
   , root  :: !(Path Abs Dir)
   }
 
@@ -26,24 +24,24 @@ getFilesystemState = ask
 $(deriveSafeCopy 0 'base ''FilesystemState)
 $(makeAcidic ''FilesystemState ['getFilesystemState])
 
-emptyFilesystem :: Path Rel Dir -> FilesystemState
-emptyFilesystem dir = FilesystemState . FileTree $ Directory dir Metadata []
+emptyFilesystem :: FilesystemState
+emptyFilesystem = FilesystemState . FileTree $ Directory $(mkRelDir "root") [] [] DirMetadata
 
 open :: FilePath -> IO Filesystem
 open filePath = do
   canonical <- makeAbsolute filePath
   root <- parseAbsDir canonical
   let appStateDir = root </> $(mkRelDir "app-state")
-      appRootDir  = root </> $(mkRelDir "root")
+      appObjDir   = root </> $(mkRelDir "objects")
 
   createDirectoryIfMissing True (fromAbsDir appStateDir)
-  createDirectoryIfMissing True (fromAbsDir appRootDir)
+  createDirectoryIfMissing True (fromAbsDir appObjDir)
 
-  state <- openLocalStateFrom (fromAbsDir appStateDir) (emptyFilesystem $ dirname appRootDir)
-  return $ Filesystem {state, root}
+  fsState <- openLocalStateFrom (fromAbsDir appStateDir) emptyFilesystem
+  return $ Filesystem {fsState, root}
 
 close :: Filesystem -> IO ()
-close Filesystem{state} = createCheckpointAndClose state
+close fs = createCheckpointAndClose fs.fsState
 
 getRoot :: Filesystem -> IO FileTree
-getRoot Filesystem{state} = filesystemRoot <$> query' state GetFilesystemState
+getRoot fs = filesystemRoot <$> query' fs.fsState GetFilesystemState

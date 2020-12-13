@@ -1,6 +1,6 @@
 module Http.Monad where
 
-import Control.Monad.Reader
+import Basis
 
 import Persistence.FilesystemState
 import Servant

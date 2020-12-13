@@ -1,0 +1,4 @@
+[Info] Hello! @(main:Test app/Test.hs:11:5)
+[Info#Thread] Hello!
+[INFO] [12-Dec-2020 20:26:44] [main] Hello!
+[INFO] [12-Dec-2020 20:32:49] [main] Hello!

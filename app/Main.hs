@@ -1,11 +1,11 @@
 module Main where
 
+import Basis
 import Http.Server
 import Persistence.FilesystemState
 
 import Network.Wai.Handler.Warp
 
-import Control.Exception
 import Options.Applicative
 
 data Cmd = Cmd

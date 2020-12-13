@@ -33,8 +33,14 @@ dependencies:
 - ixset-typed
 - safecopy
 - mtl
+- filepath
+- record-hasfield
 - directory
 - optparse-applicative
+- interpolatedstring-perl6
+- protolude
+- unliftio
+- extra
 
 default-extensions:
 - OverloadedStrings
@@ -60,6 +66,9 @@ default-extensions:
 - DerivingStrategies
 - DuplicateRecordFields
 - GeneralizedNewtypeDeriving
+- QuasiQuotes
+- NoImplicitPrelude
+- TupleSections
 
 library:
   source-dirs: .
@@ -72,6 +81,10 @@ executables:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
+    - -Wall
+    - -Wextra
+    - -Wincomplete-uni-patterns
+    - -Wpartial-fields
     dependencies:
     - base
     - Fileserver
