@@ -25,7 +25,7 @@ $(deriveSafeCopy 0 'base ''FilesystemState)
 $(makeAcidic ''FilesystemState ['getFilesystemState])
 
 emptyFilesystem :: FilesystemState
-emptyFilesystem = FilesystemState . FileTree $ Directory $(mkRelDir "root") [] [] DirMetadata
+emptyFilesystem = FilesystemState . FileTree $ Directory rootPath [] [] DirMetadata
 
 open :: FilePath -> IO Filesystem
 open filePath = do

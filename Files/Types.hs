@@ -6,9 +6,13 @@ module Files.Types
   , File (..)
   , Directory (..)
   , FileTree (..)
+  , rootPath
   ) where
 
 import Basis
+
+rootPath :: Path Rel Dir
+rootPath = $(mkRelDir "root")
 
 data FileMetadata = FileMetadata
   { fileHash :: !Hash
