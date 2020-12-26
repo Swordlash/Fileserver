@@ -193,6 +193,7 @@ extra-deps:
 - mtl-compat-0.2.2@sha256:4257fb56e5690734973aad060010bec6c2857f5c1ac6cf87fc335ed3bc7c85f4,3333
 - unliftio-0.2.13.1@sha256:cdbca997c6c113f8ba78847979d4a90250a1e4681a5f3784649ab3c8164d94ff,3327
 - extra-1.7.8@sha256:113673aa5ab547780c19e8081d463edabfacd34dafe03b5a9a43da9a2fa920ec,2683
+- servant-blaze-0.9.1@sha256:98cd32ba5ca33895d4f1bab8c745bbe6aae699e2ad86787c475224fe7b0ec690,1554
 
 
 # Override default flag values for local packages and extra-deps

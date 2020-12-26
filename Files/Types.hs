@@ -15,12 +15,12 @@ rootPath :: Path Rel Dir
 rootPath = $(mkRelDir "root")
 
 data FileMetadata = FileMetadata
-  { fileHash :: !Hash
+  { -- fileHash :: !Hash
   } deriving stock (Eq, Show, Generic)
     deriving anyclass (ToJSON, FromJSON)
 
 data DirMetadata = DirMetadata
-  { --hash :: !Hash
+  { -- dirHash :: !Hash
   } deriving stock (Eq, Show, Generic)
     deriving anyclass (ToJSON, FromJSON)
 

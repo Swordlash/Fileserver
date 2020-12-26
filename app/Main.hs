@@ -20,7 +20,7 @@ cmdParser =
   where
     parser = Cmd
       <$> strOption   (long "root" <> metavar "DIR" <> help "Root of the application data")
-      <*> option auto (long "port" <> help "HTTP port" <> showDefault <> value 8080 <> metavar "PORT")
+      <*> option auto (long "port" <> help "HTTP port" <> showDefault <> value 8000 <> metavar "PORT")
 
 main :: IO ()
 main = do

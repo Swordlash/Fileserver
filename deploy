@@ -1,0 +1,12 @@
+#!/bin/bash
+DIR=/home/pi/Fileserver
+echo "Changing dir to $DIR"
+cd /home/pi/Fileserver
+echo "Saving changes"
+git stash
+echo "Pulling recent changes"
+git pull --rebase
+echo "Installing"
+stack install
+echo "Restarting service"
+sudo systemctl restart ngrok-server.service

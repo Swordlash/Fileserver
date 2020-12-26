@@ -1,19 +1,19 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.34.3.
+-- This file has been generated from package.yaml by hpack version 0.33.0.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 6a045eeadb4e4d30b8d5db6f8533c2c8dacd7a1ba5779c1e66ea64963d1cc800
+-- hash: 79713f47e77389c59a57afdf7a335fc9c391b7cc278265d9b495fa928c6d1314
 
 name:           Fileserver
 version:        0.1.0.0
-description:    Please see the README on GitHub at <https://github.com/githubuser/Fileserver#readme>
-homepage:       https://github.com/githubuser/Fileserver#readme
-bug-reports:    https://github.com/githubuser/Fileserver/issues
-author:         Author name here
-maintainer:     example@example.com
-copyright:      2020 Author name here
+description:    Please see the README on GitHub at <https://github.com/Swordlash/Fileserver#readme>
+homepage:       https://github.com/Swordlash/Fileserver#readme
+bug-reports:    https://github.com/Swordlash/Fileserver/issues
+author:         Mateusz Goślinowski
+maintainer:     mateusz.goslinowski@gmail.com
+copyright:      2020 Mateusz Goślinowski
 license:        BSD3
 license-file:   LICENSE
 build-type:     Simple
@@ -22,7 +22,7 @@ extra-source-files:
 
 source-repository head
   type: git
-  location: https://github.com/githubuser/Fileserver
+  location: https://github.com/Swordlash/Fileserver
 
 library
   exposed-modules:
@@ -34,15 +34,18 @@ library
       Http.Server
       Http.Types
       Persistence.FilesystemState
+      Statics
   other-modules:
       Paths_Fileserver
   hs-source-dirs:
-      ./
+      ./.
   default-extensions: OverloadedStrings OverloadedLists DataKinds PolyKinds MultiParamTypeClasses FunctionalDependencies FlexibleInstances UndecidableInstances LambdaCase NamedFieldPuns RecordWildCards TypeApplications TypeFamilies TypeOperators RankNTypes ScopedTypeVariables TemplateHaskell DeriveGeneric DeriveDataTypeable DeriveAnyClass DerivingStrategies DuplicateRecordFields GeneralizedNewtypeDeriving QuasiQuotes NoImplicitPrelude TupleSections
   build-depends:
       acid-state
     , aeson
     , base >=4.7 && <5
+    , blaze-html
+    , blaze-markup
     , conduit
     , cryptonite
     , directory
@@ -56,6 +59,7 @@ library
     , protolude
     , record-hasfield
     , safecopy
+    , servant-blaze
     , servant-conduit
     , servant-server
     , text
@@ -77,6 +81,8 @@ executable fileserver
     , acid-state
     , aeson
     , base
+    , blaze-html
+    , blaze-markup
     , conduit
     , cryptonite
     , directory
@@ -90,6 +96,7 @@ executable fileserver
     , protolude
     , record-hasfield
     , safecopy
+    , servant-blaze
     , servant-conduit
     , servant-server
     , text
@@ -112,6 +119,8 @@ test-suite fileserver-test
     , acid-state
     , aeson
     , base
+    , blaze-html
+    , blaze-markup
     , conduit
     , cryptonite
     , directory
@@ -128,6 +137,7 @@ test-suite fileserver-test
     , protolude
     , record-hasfield
     , safecopy
+    , servant-blaze
     , servant-conduit
     , servant-server
     , text

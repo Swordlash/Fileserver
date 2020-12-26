@@ -31,13 +31,15 @@ open :: FilePath -> IO Filesystem
 open filePath = do
   canonical <- makeAbsolute filePath
   root <- parseAbsDir canonical
-  let appStateDir = root </> $(mkRelDir "app-state")
-      appObjDir   = root </> $(mkRelDir "objects")
+  let acidStateDir = root </> $(mkRelDir "acid")
+      appFilesDir  = root </> $(mkRelDir "files")
+      staticsDir   = root </> $(mkRelDir "static-files")
 
-  createDirectoryIfMissing True (fromAbsDir appStateDir)
-  createDirectoryIfMissing True (fromAbsDir appObjDir)
+  createDirectoryIfMissing True (fromAbsDir acidStateDir)
+  createDirectoryIfMissing True (fromAbsDir appFilesDir)
+  createDirectoryIfMissing True (fromAbsDir staticsDir)
 
-  fsState <- openLocalStateFrom (fromAbsDir appStateDir) emptyFilesystem
+  fsState <- openLocalStateFrom (fromAbsDir acidStateDir) emptyFilesystem
   return $ Filesystem {fsState, root}
 
 close :: Filesystem -> IO ()

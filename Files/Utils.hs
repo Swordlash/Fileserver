@@ -21,7 +21,7 @@ splitPath = NE.reverse . loop split . (, singleton rootPath)
 -- TODO: check if exists
 createFile :: Path Abs Dir -> File -> FileTree -> FileTree
 createFile path file = updateDir path f
-  where f dir = dir { files = file : dir.files }
+  where f dir = dir{ files = file : dir.files }
 
 createEmptyDir :: Path Rel Dir -> Directory
 createEmptyDir name = Directory name [] [] DirMetadata

@@ -1,3 +1,4 @@
+{-# OPTIONS_GHC -F -pgmF=record-dot-preprocessor #-}
 module Http.Server where
 
 import Basis
@@ -9,11 +10,20 @@ import Http.Types
 import Http.Monad
 import Persistence.FilesystemState
 
-app :: Filesystem -> Application
-app filesystem = serve (Proxy @API) $ hoistServer (Proxy @API) (runAppM filesystem) server
+import Statics
 
-server :: AppServer API
-server = listFiles
+app :: Filesystem -> Application
+app filesystem = serve (Proxy @API) $ hoistServer (Proxy @API) (runAppM filesystem) (server filesystem.root)
+
+server :: Path Abs Dir -> AppServer API
+server root =
+  htmlServer
+  :<|> filesServer
+  :<|> staticServer
+  where
+    htmlServer = pure hello
+    filesServer = listFiles
+    staticServer = serveDirectoryWebApp (toFilePath $ root </> $(mkRelDir "static-files"))
 
 listFiles :: AppM RespListFiles
 listFiles = do

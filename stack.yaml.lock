@@ -1075,4 +1075,11 @@ packages:
       sha256: a3565b127fb89e76b715d817229d8e4020e6e81cd3ebee57df62a52e516e4fa7
   original:
     hackage: extra-1.7.8@sha256:113673aa5ab547780c19e8081d463edabfacd34dafe03b5a9a43da9a2fa920ec,2683
+- completed:
+    hackage: servant-blaze-0.9.1@sha256:98cd32ba5ca33895d4f1bab8c745bbe6aae699e2ad86787c475224fe7b0ec690,1554
+    pantry-tree:
+      size: 331
+      sha256: 8e1b7d02d9210462ea06ae9abdb888e3da79fa0e9cfc8651a6b921e922222d43
+  original:
+    hackage: servant-blaze-0.9.1@sha256:98cd32ba5ca33895d4f1bab8c745bbe6aae699e2ad86787c475224fe7b0ec690,1554
 snapshots: []
