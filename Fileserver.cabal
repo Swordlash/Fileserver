@@ -1,10 +1,10 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.33.0.
+-- This file has been generated from package.yaml by hpack version 0.34.3.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 95133faa9003c94b82c533dc96150d259fbd423522aacdd3e90067c530c5ae86
+-- hash: 6a045eeadb4e4d30b8d5db6f8533c2c8dacd7a1ba5779c1e66ea64963d1cc800
 
 name:           Fileserver
 version:        0.1.0.0
@@ -37,7 +37,7 @@ library
   other-modules:
       Paths_Fileserver
   hs-source-dirs:
-      ./.
+      ./
   default-extensions: OverloadedStrings OverloadedLists DataKinds PolyKinds MultiParamTypeClasses FunctionalDependencies FlexibleInstances UndecidableInstances LambdaCase NamedFieldPuns RecordWildCards TypeApplications TypeFamilies TypeOperators RankNTypes ScopedTypeVariables TemplateHaskell DeriveGeneric DeriveDataTypeable DeriveAnyClass DerivingStrategies DuplicateRecordFields GeneralizedNewtypeDeriving QuasiQuotes NoImplicitPrelude TupleSections
   build-depends:
       acid-state
