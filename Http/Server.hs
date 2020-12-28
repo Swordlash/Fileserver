@@ -21,7 +21,7 @@ server root =
   :<|> filesServer
   :<|> staticServer
   where
-    htmlServer = pure hello
+    htmlServer = pure index
     filesServer = listFiles
     staticServer = serveDirectoryWebApp (toFilePath $ root </> $(mkRelDir "static-files"))
 

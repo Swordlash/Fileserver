@@ -34,7 +34,7 @@ createEmptyDirs dirs = case NE.uncons dirs of
 -- | Updates a directory. If it does not exist, applies the function to the empty directory
 updateDir :: Path Abs Dir -> (Directory -> Directory) -> FileTree -> FileTree
 updateDir path f (FileTree dir) = FileTree $ updateDir' paths f dir
-  where paths             = splitPath path
+  where paths = splitPath path
 
 updateDir' :: NonEmpty (Path Rel Dir) -> (Directory -> Directory) -> Directory -> Directory
 updateDir' dirs f dir = case NE.uncons dirs of
