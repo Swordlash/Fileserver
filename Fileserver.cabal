@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 79713f47e77389c59a57afdf7a335fc9c391b7cc278265d9b495fa928c6d1314
+-- hash: b9600b1388e0e639df5285641139d501ec0e0fae0ee16ec5be0ef853772c8648
 
 name:           Fileserver
 version:        0.1.0.0
@@ -34,7 +34,7 @@ library
       Http.Server
       Http.Types
       Persistence.FilesystemState
-      Statics
+      Statics.Index
   other-modules:
       Paths_Fileserver
   hs-source-dirs:

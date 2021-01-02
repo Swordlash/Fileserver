@@ -1,4 +1,4 @@
-module Statics where
+module Statics.Index where
 
 import Basis hiding (head, link)
 import Data.Monoid (mempty)
@@ -19,20 +19,21 @@ index = do
     link ! rel "stylesheet" ! href "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     H.style "html, body, h1, h2, h3, h4, h5, h6 {\n        font-family: \"Roboto\", sans-serif\n    }"
     H.head $ do
-      script ! A.async "" ! src "https://www.googletagmanager.com/gtag/js?id=UA-115069825-1" $ mempty
-      script "window.dataLayer = window.dataLayer || [];\n\n        function gtag() {\n            dataLayer.push(arguments);\n        }\n\n        gtag('js', new Date());\n\n        gtag('config', 'UA-115069825-1');"
       script ! type_ "application/ld+json" $ "{\n          \"@context\": \"http://schema.org\",\n          \"@type\": \"Person\",\n          \"email\": \"mailto:mateusz.goslinowski@gmail.pl\",\n          \"image\": \"static/photo.jpg\",\n          \"jobTitle\": \"Haskell Developer\",\n          \"name\": \"Mateusz Goślinowski\",\n          \"url\": \"http://mgoslinowski.ngrok.io\",\n        }"
     body ! class_ "w3-light-grey" $ do
       H.div ! class_ "w3-content w3-margin-top" ! A.style "max-width:1400px;" $ do
         H.div ! class_ "w3-row-padding" $ do
           H.div ! class_ "w3-third" $ do
             H.div ! class_ "w3-white w3-text-grey w3-card-4" $ do
-              H.div ! class_ "w3-display-container" $ img ! src "static/profilove.jpg" ! A.style "width:100%" ! alt "Avatar"
+              H.div ! class_ "w3-display-container" $ img ! src "static/fb.jpg" ! A.style "width:100%" ! alt "Avatar"
               H.div ! class_ "w3-container" ! A.id "info" $ do
                 p $ h3 ! class_ "w3-text-black" $ "Mateusz Goślinowski"
                 p $ do
                   i ! class_ "fa fa-graduation-cap fa-fw w3-margin-right w3-large w3-text-dark-gray" $ mempty
-                  "Mathematical physicist"
+                  "Mathematics, Computer Science"
+                p $ do
+                  i ! class_ "fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-dark-grey" $ mempty
+                  "Haskell Developer"
                 p $ do
                   i ! class_ "fa fa-home fa-fw w3-margin-right w3-large w3-text-dark-gray" $ mempty
                   "Warsaw, PL"
@@ -45,10 +46,9 @@ index = do
                     i ! class_ "fa fa-flask fa-fw w3-margin-right w3-text-dark-gray" $ mempty
                     "Fields of\n                        interest:"
                 ul $ do
+                  li $ p "Functional Programming (Haskell)"
                   li $ p "Mathematical foundations of quantum theory and relativity"
                   li $ p "Partial differential equations"
-                  li $ p "General complex and real analysis"
-                  li $ p "Functional programming"
             br
           H.div ! class_ "w3-hide-small w3-twothird" $
             H.div ! class_ "w3-display-container w3-card w3-white w3-bar w3-margin-bottom" $ do
@@ -73,6 +73,14 @@ index = do
                 i ! class_ "fa fa-university fa-fw w3-margin-right w3-xxlarge w3-text-dark-gray" $ mempty
                 "Education"
               H.div ! class_ "w3-container" $ do
+                h5 ! class_ "w3-opacity" $ b "Warsaw University of Technology"
+                h6 ! class_ "w3-opacity" $ b "The Faculty of Electronics and Information Technology"
+                h6 ! class_ "w3-text-dark-gray" $ do
+                  H.span ! A.style "width:66%;" $ do
+                    i ! class_ "fa fa-calendar fa-fw w3-margin-right" $ mempty
+                    "2020 - current"
+                  H.span ! A.style "width:33%; padding-left: 3em" $ "Computer Science (MEng)"
+
                 h5 ! class_ "w3-opacity" $ b "University of Warsaw"
                 h6 ! class_ "w3-opacity" $ b "College of Inter-Faculty Individual Studies in Mathematics and Natural Sciences"
                 h6 ! class_ "w3-text-dark-gray" $ do
@@ -86,20 +94,6 @@ index = do
                     "2016 - 2019"
                   H.span ! A.style "width:33%; padding-left: 3em" $ "Computer Science"
                 hr
-              H.div ! class_ "w3-container" $ do
-                h5 ! class_ "w3-opacity" $ b "XIII High School in Szczecin"
-                h6 ! class_ "w3-text-dark-gray" $ do
-                  i ! class_ "fa fa-calendar fa-fw w3-margin-right" $ mempty
-                  "2013 - 2016"
-                p $ do
-                  "Mathematics and physics-profiled class"
-                  br
-                  small $
-                    ul $ do
-                      li "Laureate of Polish High School Olympiad in Physics (18th place)"
-                      li "Finalist of Polish High School Olympiad in Mathematics (places 80-100)"
-                      li "Graduated with honors (3rd)"
-                      li "Awarded with Ministry of Education Prize for Best High School Students 2016"
           H.div ! class_ "w3-twothird" ! A.id "teaching" $
             H.div ! class_ "w3-container w3-card w3-white w3-margin-bottom" $ do
               h2 ! class_ "w3-text-grey w3-padding-16" $ do
@@ -188,4 +182,4 @@ index = do
                   br
                   br
       footer ! class_ "w3-container w3-white w3-text-grey w3-center w3-margin-top" $ do
-        p "Powered by w3.css"
+        p "Powered by w3.css, servant and servant-blaze"

@@ -10,7 +10,7 @@ import Http.Types
 import Http.Monad
 import Persistence.FilesystemState
 
-import Statics
+import Statics.Index
 
 app :: Filesystem -> Application
 app filesystem = serve (Proxy @API) $ hoistServer (Proxy @API) (runAppM filesystem) (server filesystem.root)
