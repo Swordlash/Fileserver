@@ -8,7 +8,7 @@ import Text.Blaze.Html5.Attributes
 import qualified Text.Blaze.Html5.Attributes as A
 
 index :: Html
-index = do
+index =
   docTypeHtml $ do
     H.title "Homepage of Mateusz Goślinowski"
     meta ! charset "UTF-8"

@@ -3,6 +3,7 @@ module Basis
   , module Path
   , module Data.SafeCopy
   , module Data.Aeson
+  , module Text.InterpolatedString.Perl6
   , bracket
   , try
   , catch
@@ -13,6 +14,7 @@ module Basis
   , (<|)
   , Fil
   , L.delete
+  , JWK(..)
   ) where
 
 import Protolude hiding (bracket, try, catch, finally, async, (<.>), option, Handler)
@@ -27,6 +29,9 @@ import Data.Aeson
 import Data.List.NonEmpty
 
 import qualified Data.List as L
+import Crypto.JOSE.JWK (JWK(..))
+
+import Text.InterpolatedString.Perl6
 
 type Fil = P.File
 

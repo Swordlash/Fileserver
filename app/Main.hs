@@ -2,7 +2,7 @@ module Main where
 
 import Basis
 import Http.Server
-import Persistence.FilesystemState
+import Persistence.Persistence
 
 import Network.Wai.Handler.Warp
 

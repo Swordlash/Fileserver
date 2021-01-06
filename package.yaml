@@ -24,6 +24,7 @@ dependencies:
 - servant-server
 - servant-conduit
 - wai
+- wai-extra
 - warp
 - cryptonite
 - conduit
@@ -42,8 +43,13 @@ dependencies:
 - unliftio
 - extra
 - servant-blaze
+- jose
+- http-types
+- servant-auth
+- servant-auth-server
 - blaze-markup
 - blaze-html
+- http-api-data
 
 default-extensions:
 - OverloadedStrings
