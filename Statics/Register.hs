@@ -2,33 +2,24 @@ module Statics.Register where
 
 import Basis hiding (head, link, for)
 import Data.Monoid (mempty)
-import Text.Blaze.Html5
-import qualified Text.Blaze.Html5 as H
-import Text.Blaze.Html5.Attributes hiding (label, form)
-import qualified Text.Blaze.Html5.Attributes as A
+import Text.Blaze.Html5 as H
+import Text.Blaze.Html5.Attributes as A hiding (label, form)
+
+import Statics.Utils
 
 registered :: Html
 registered = docTypeHtml $ do
   H.title "Fileserver"
-  link ! rel "icon" ! href "static/favicon.ico"
+  defHead
   H.head $ meta ! httpEquiv "Refresh" ! content "3; URL=/login"
   body $ do
     p [qq|Successfully registered, redirecting to login...|]
-
 
 register :: Html
 register =
   docTypeHtml $ do
     H.title "Fileserver"
-    meta ! charset "UTF-8"
-    meta ! name "viewport" ! content "width=device-width, initial-scale=1"
-    link ! rel "icon" ! href "static/favicon.ico"
-    link ! rel "stylesheet" ! href "static/styles.css"
-    link ! rel "stylesheet" ! href "https://fonts.googleapis.com/css?family=Roboto"
-    link ! rel "stylesheet" ! href "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    H.style "html, body, h1, h2, h3, h4, h5, h6 {\n        font-family: \"Roboto\", sans-serif\n    }"
-    H.head $ do
-      script ! type_ "application/ld+json" $ "{\n          \"@context\": \"http://schema.org\",\n          \"@type\": \"Person\",\n          \"email\": \"mailto:mateusz.goslinowski@gmail.pl\",\n          \"image\": \"static/photo.jpg\",\n          \"jobTitle\": \"Haskell Developer\",\n          \"name\": \"Mateusz Goślinowski\",\n          \"url\": \"http://mgoslinowski.ngrok.io\",\n        }"
+    defHead
     body ! class_ "w3-light-grey" $ do
       H.div ! class_ "w3-container" $ do
         p ! class_ "w3-text-black" $ do

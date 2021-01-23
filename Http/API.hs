@@ -48,4 +48,6 @@ type FileAPI =
 type StaticAPI = "static" :> Raw
 
 type FileListing =
-  "shared" :> Raw
+  "files" :> "list"
+          :> ReqBody '[FormUrlEncoded, JSON] ReqGetMyFiles
+          :> Get '[HTML] Html

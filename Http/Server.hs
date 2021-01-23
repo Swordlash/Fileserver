@@ -83,14 +83,17 @@ htmlRegister = pure register
 filesServer :: Path Abs Dir -> AppServer (ProtectedFileAPI auths)
 filesServer root = filesListing root
 
-filesListing :: Path Abs Dir -> AuthResult User -> Tagged AppM Application
-filesListing root auth = case auth of
-  Authenticated usr -> serveDirectoryFileServer (toFilePath root </> "shared-files" </> toS usr.username)
-  _ -> Tagged $ \_req resp -> do
-                    putText [qq|AuthResult: $auth|]
-                    resp $ responseLBS status401 [] "User not authenticated"
+filesListing :: Path Abs Dir -> AuthResult User -> ReqGetMyFiles -> AppM Html
+filesListing root auth ReqGetMyFiles{filePath} = case auth of
+  Authenticated usr -> undefined
+  _ -> servantErr err401 "User not authenticated"
 
 -----------------------------------------------------------------
 
 staticServer :: Path Abs Dir -> AppServer StaticAPI
 staticServer root = serveDirectoryWebApp (toFilePath root </> "static-files")
+
+-----------------------------------------------------------------
+
+servantErr :: (MonadError ServerError m) => ServerError -> Text -> m a
+servantErr err body = throwError err {errBody = toUtf8Lazy body}

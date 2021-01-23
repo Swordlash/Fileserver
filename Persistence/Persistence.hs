@@ -5,7 +5,6 @@ import Basis
 import Data.Acid
 import Data.Acid.Advanced
 import Data.Acid.Local
-import Files.Types
 
 import Http.Auth
 import Crypto.JOSE.JWK
@@ -21,8 +20,7 @@ data AppState = AppState
   }
 
 data Persistence = Persistence
-  { filesystemRoot :: !FileTree
-  , users          :: ![User]
+  { users          :: ![User]
   } deriving stock (Eq, Show, Generic)
 
 getPersistence :: Query Persistence Persistence
@@ -35,7 +33,7 @@ $(deriveSafeCopy 0 'base ''Persistence)
 $(makeAcidic ''Persistence ['getPersistence, 'addUser_])
 
 emptyPersistence :: Persistence
-emptyPersistence = Persistence (FileTree $ Directory rootPath [] [] DirMetadata) []
+emptyPersistence = Persistence []
 
 open :: FilePath -> IO AppState
 open filePath = do
@@ -59,11 +57,6 @@ close :: AppState -> IO ()
 close apps = createCheckpointAndClose apps.pers
 
 ---------------------------------------------------------------------------------------------
-
-getRoot :: (MonadIO m, MonadReader AppState m) => m FileTree
-getRoot = do
-  p <- asks pers
-  liftIO $ filesystemRoot <$> query' p GetPersistence
 
 getUsers :: (MonadIO m, MonadReader AppState m) => m [User]
 getUsers = do

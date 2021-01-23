@@ -7,19 +7,13 @@ import qualified Text.Blaze.Html5 as H
 import Text.Blaze.Html5.Attributes
 import qualified Text.Blaze.Html5.Attributes as A
 
+import Statics.Utils
+
 index :: Html
 index =
   docTypeHtml $ do
     H.title "Homepage of Mateusz Goślinowski"
-    meta ! charset "UTF-8"
-    meta ! name "viewport" ! content "width=device-width, initial-scale=1"
-    link ! rel "icon" ! href "static/favicon.ico"
-    link ! rel "stylesheet" ! href "static/styles.css"
-    link ! rel "stylesheet" ! href "https://fonts.googleapis.com/css?family=Roboto"
-    link ! rel "stylesheet" ! href "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    H.style "html, body, h1, h2, h3, h4, h5, h6 {\n        font-family: \"Roboto\", sans-serif\n    }"
-    H.head $ do
-      script ! type_ "application/ld+json" $ "{\n          \"@context\": \"http://schema.org\",\n          \"@type\": \"Person\",\n          \"email\": \"mailto:mateusz.goslinowski@gmail.pl\",\n          \"image\": \"static/photo.jpg\",\n          \"jobTitle\": \"Haskell Developer\",\n          \"name\": \"Mateusz Goślinowski\",\n          \"url\": \"http://mgoslinowski.ngrok.io\",\n        }"
+    defHead
     body ! class_ "w3-light-grey" $ do
       H.div ! class_ "w3-content w3-margin-top" ! A.style "max-width:1400px;" $ do
         H.div ! class_ "w3-row-padding" $ do
